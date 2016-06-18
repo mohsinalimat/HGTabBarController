@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nullable,nonatomic,assign) id<HGTabBarDelegate> delegate;     // weak reference. default is nil
 
-/**
+/*!
  *  赋值方法
  *
  *  @param titles        标题数组

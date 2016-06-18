@@ -41,9 +41,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol HGTabBarControllerDelegate <NSObject>
 @optional
-
-/// 选中控制器之前
-- (BOOL)tabBarController:(HGTabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController;
 /// 选中控制器之后
 - (void)tabBarController:(HGTabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController;
 @end

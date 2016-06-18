@@ -15,7 +15,7 @@
 //实现自定义的btn
 @implementation HGTabbarButton
 
-//图片高亮时候会调用这个方法
+//图片高亮时候会调用这个方法,取消高亮
 -(void)setHighlighted:(BOOL)highlighted{
     
 }
@@ -27,7 +27,7 @@
 @interface HGTabBar ()
 @property (nonatomic,weak)UIButton    *selectedBtn;// <-当前选中的按钮
 @property (nonatomic,weak)UIImageView *splitLine;// <-分割线
-@property (nonatomic,weak)UIView      *tabBarBackgroundView;
+@property (nonatomic,weak)UIView      *tabBarBackgroundView;// <-背景View
 @end
 @implementation HGTabBar
 
@@ -97,6 +97,8 @@
     [super layoutSubviews];
     
     self.backgroundColor=TabBarbackColor;
+    
+    //背景View的frame
     _tabBarBackgroundView.frame=self.bounds;
     
     //分割线的frame

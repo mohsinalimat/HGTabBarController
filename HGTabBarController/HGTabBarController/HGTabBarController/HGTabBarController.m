@@ -11,7 +11,7 @@
 
 @interface HGTabBarController ()<HGTabBarDelegate,UINavigationControllerDelegate>
 @property (nonatomic, strong) UIView            *currentView; // <-当前的视图view
-@property (nonatomic,assign)  BOOL  isNavigationController;
+@property (nonatomic, assign) BOOL  isNavigationController;// <- 子控制器都是导航控制器
 
 @end
 
@@ -37,7 +37,6 @@
     
     if (!_isNavigationController) {
         _tabBar.hidden=NO;
-
     }
     
 }
@@ -60,6 +59,13 @@
             controller.delegate=self;
             self.isNavigationController=YES;
             self.navigationController.navigationBar.hidden=YES;
+            controller.topViewController.title=_tabBar.titles[i];
+            
+            UIView *view=controller.view;
+            view.frame=self.view.bounds;
+            [self addChildViewController:controller];
+            
+            // 这里可以自己修改返回
             if (_leftBarButtonItem) {
                 controller.topViewController.navigationItem.leftBarButtonItem=_leftBarButtonItem;
             }else{
@@ -68,13 +74,9 @@
                                                 style:UIBarButtonItemStylePlain
                                                target:self
                                                action:@selector(back)];
-                
-                controller.topViewController.title=_tabBar.titles[i];
             }
+            
         }
-        UIView *view=controller.view;
-        view.frame=self.view.bounds;
-        [self addChildViewController:controller];
     }
     
     // 默认选中第一个控制器
@@ -90,8 +92,6 @@
     _tabBar.selectedIndex=selectedIndex;
     _selectedIndex=selectedIndex;
 }
-
-
 
 - (void)back
 {
