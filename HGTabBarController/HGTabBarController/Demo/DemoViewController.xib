@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DemoViewController">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iDh-Zw-9KU">
+                    <rect key="frame" x="283" y="285" width="34" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="34" id="26P-KJ-UHo"/>
+                        <constraint firstAttribute="height" constant="30" id="ccf-NJ-EA8"/>
+                    </constraints>
+                    <state key="normal" title="push"/>
+                    <connections>
+                        <action selector="push:" destination="-1" eventType="touchUpInside" id="x0I-PL-3F9"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="iDh-Zw-9KU" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="RA3-dX-34P"/>
+                <constraint firstItem="iDh-Zw-9KU" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="g01-m9-VEB"/>
+            </constraints>
+            <point key="canvasLocation" x="193" y="266"/>
+        </view>
+    </objects>
+</document>

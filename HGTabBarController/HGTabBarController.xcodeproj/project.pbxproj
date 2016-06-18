@@ -1,0 +1,360 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		660F75401D0BDF9E00B25325 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 660F753F1D0BDF9E00B25325 /* main.m */; };
+		660F754B1D0BDF9E00B25325 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 660F754A1D0BDF9E00B25325 /* Assets.xcassets */; };
+		660F754E1D0BDF9E00B25325 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 660F754C1D0BDF9E00B25325 /* LaunchScreen.storyboard */; };
+		660F755D1D0BE00800B25325 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 660F755B1D0BE00800B25325 /* AppDelegate.m */; };
+		660F75601D0BE03400B25325 /* HGTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 660F755F1D0BE03400B25325 /* HGTabBarController.m */; };
+		660F75631D0BE05800B25325 /* HGTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 660F75621D0BE05800B25325 /* HGTabBar.m */; };
+		660F76111D14525000B25325 /* DemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 660F760F1D14525000B25325 /* DemoViewController.m */; };
+		660F76121D14525000B25325 /* DemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 660F76101D14525000B25325 /* DemoViewController.xib */; };
+		66C2F9751D154E7B006F5C14 /* Demo1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C2F9731D154E7B006F5C14 /* Demo1ViewController.m */; };
+		66C2F9761D154E7B006F5C14 /* Demo1ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 66C2F9741D154E7B006F5C14 /* Demo1ViewController.xib */; };
+		66D8CC8E1D14FB8D006040A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66D8CC8D1D14FB8D006040A7 /* Main.storyboard */; };
+		66D8CC911D14FBA6006040A7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 66D8CC901D14FBA6006040A7 /* ViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		660F753B1D0BDF9E00B25325 /* HGTabBarController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HGTabBarController.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		660F753F1D0BDF9E00B25325 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		660F754A1D0BDF9E00B25325 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		660F754D1D0BDF9E00B25325 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		660F754F1D0BDF9E00B25325 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		660F755A1D0BE00800B25325 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		660F755B1D0BE00800B25325 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		660F755E1D0BE03400B25325 /* HGTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HGTabBarController.h; sourceTree = "<group>"; };
+		660F755F1D0BE03400B25325 /* HGTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HGTabBarController.m; sourceTree = "<group>"; };
+		660F75611D0BE05800B25325 /* HGTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HGTabBar.h; sourceTree = "<group>"; };
+		660F75621D0BE05800B25325 /* HGTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HGTabBar.m; sourceTree = "<group>"; };
+		660F760E1D14525000B25325 /* DemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoViewController.h; sourceTree = "<group>"; };
+		660F760F1D14525000B25325 /* DemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoViewController.m; sourceTree = "<group>"; };
+		660F76101D14525000B25325 /* DemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DemoViewController.xib; sourceTree = "<group>"; };
+		66C2F9721D154E7B006F5C14 /* Demo1ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Demo1ViewController.h; sourceTree = "<group>"; };
+		66C2F9731D154E7B006F5C14 /* Demo1ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Demo1ViewController.m; sourceTree = "<group>"; };
+		66C2F9741D154E7B006F5C14 /* Demo1ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Demo1ViewController.xib; sourceTree = "<group>"; };
+		66D8CC8D1D14FB8D006040A7 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		66D8CC8F1D14FBA6006040A7 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		66D8CC901D14FBA6006040A7 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		660F75381D0BDF9E00B25325 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		660F75321D0BDF9E00B25325 = {
+			isa = PBXGroup;
+			children = (
+				660F753D1D0BDF9E00B25325 /* HGTabBarController */,
+				660F753C1D0BDF9E00B25325 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		660F753C1D0BDF9E00B25325 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				660F753B1D0BDF9E00B25325 /* HGTabBarController.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		660F753D1D0BDF9E00B25325 /* HGTabBarController */ = {
+			isa = PBXGroup;
+			children = (
+				660F75551D0BE00800B25325 /* Demo */,
+				660F75581D0BE00800B25325 /* HGTabBarController */,
+				660F75591D0BE00800B25325 /* Others */,
+				660F754A1D0BDF9E00B25325 /* Assets.xcassets */,
+				660F754C1D0BDF9E00B25325 /* LaunchScreen.storyboard */,
+				660F754F1D0BDF9E00B25325 /* Info.plist */,
+				660F753E1D0BDF9E00B25325 /* Supporting Files */,
+			);
+			path = HGTabBarController;
+			sourceTree = "<group>";
+		};
+		660F753E1D0BDF9E00B25325 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				660F753F1D0BDF9E00B25325 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		660F75551D0BE00800B25325 /* Demo */ = {
+			isa = PBXGroup;
+			children = (
+				660F760E1D14525000B25325 /* DemoViewController.h */,
+				660F760F1D14525000B25325 /* DemoViewController.m */,
+				660F76101D14525000B25325 /* DemoViewController.xib */,
+				66D8CC8D1D14FB8D006040A7 /* Main.storyboard */,
+				66D8CC8F1D14FBA6006040A7 /* ViewController.h */,
+				66D8CC901D14FBA6006040A7 /* ViewController.m */,
+				66C2F9721D154E7B006F5C14 /* Demo1ViewController.h */,
+				66C2F9731D154E7B006F5C14 /* Demo1ViewController.m */,
+				66C2F9741D154E7B006F5C14 /* Demo1ViewController.xib */,
+			);
+			path = Demo;
+			sourceTree = "<group>";
+		};
+		660F75581D0BE00800B25325 /* HGTabBarController */ = {
+			isa = PBXGroup;
+			children = (
+				660F755E1D0BE03400B25325 /* HGTabBarController.h */,
+				660F755F1D0BE03400B25325 /* HGTabBarController.m */,
+				660F75611D0BE05800B25325 /* HGTabBar.h */,
+				660F75621D0BE05800B25325 /* HGTabBar.m */,
+			);
+			path = HGTabBarController;
+			sourceTree = "<group>";
+		};
+		660F75591D0BE00800B25325 /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				660F755A1D0BE00800B25325 /* AppDelegate.h */,
+				660F755B1D0BE00800B25325 /* AppDelegate.m */,
+			);
+			path = Others;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		660F753A1D0BDF9E00B25325 /* HGTabBarController */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 660F75521D0BDF9E00B25325 /* Build configuration list for PBXNativeTarget "HGTabBarController" */;
+			buildPhases = (
+				660F75371D0BDF9E00B25325 /* Sources */,
+				660F75381D0BDF9E00B25325 /* Frameworks */,
+				660F75391D0BDF9E00B25325 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HGTabBarController;
+			productName = HGTabBarController;
+			productReference = 660F753B1D0BDF9E00B25325 /* HGTabBarController.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		660F75331D0BDF9E00B25325 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = Zohar;
+				TargetAttributes = {
+					660F753A1D0BDF9E00B25325 = {
+						CreatedOnToolsVersion = 7.3;
+					};
+				};
+			};
+			buildConfigurationList = 660F75361D0BDF9E00B25325 /* Build configuration list for PBXProject "HGTabBarController" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 660F75321D0BDF9E00B25325;
+			productRefGroup = 660F753C1D0BDF9E00B25325 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				660F753A1D0BDF9E00B25325 /* HGTabBarController */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		660F75391D0BDF9E00B25325 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				660F754E1D0BDF9E00B25325 /* LaunchScreen.storyboard in Resources */,
+				66D8CC8E1D14FB8D006040A7 /* Main.storyboard in Resources */,
+				66C2F9761D154E7B006F5C14 /* Demo1ViewController.xib in Resources */,
+				660F754B1D0BDF9E00B25325 /* Assets.xcassets in Resources */,
+				660F76121D14525000B25325 /* DemoViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		660F75371D0BDF9E00B25325 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				66D8CC911D14FBA6006040A7 /* ViewController.m in Sources */,
+				660F75401D0BDF9E00B25325 /* main.m in Sources */,
+				660F75601D0BE03400B25325 /* HGTabBarController.m in Sources */,
+				660F75631D0BE05800B25325 /* HGTabBar.m in Sources */,
+				66C2F9751D154E7B006F5C14 /* Demo1ViewController.m in Sources */,
+				660F76111D14525000B25325 /* DemoViewController.m in Sources */,
+				660F755D1D0BE00800B25325 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		660F754C1D0BDF9E00B25325 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				660F754D1D0BDF9E00B25325 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		660F75501D0BDF9E00B25325 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		660F75511D0BDF9E00B25325 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		660F75531D0BDF9E00B25325 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = HGTabBarController/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Zohar.HGTabBarController.HGTabBarController;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		660F75541D0BDF9E00B25325 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = HGTabBarController/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Zohar.HGTabBarController.HGTabBarController;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		660F75361D0BDF9E00B25325 /* Build configuration list for PBXProject "HGTabBarController" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				660F75501D0BDF9E00B25325 /* Debug */,
+				660F75511D0BDF9E00B25325 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		660F75521D0BDF9E00B25325 /* Build configuration list for PBXNativeTarget "HGTabBarController" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				660F75531D0BDF9E00B25325 /* Debug */,
+				660F75541D0BDF9E00B25325 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 660F75331D0BDF9E00B25325 /* Project object */;
+}
