@@ -61,10 +61,6 @@
             self.navigationController.navigationBar.hidden=YES;
             controller.topViewController.title=_tabBar.titles[i];
             
-            UIView *view=controller.view;
-            view.frame=self.view.bounds;
-            [self addChildViewController:controller];
-            
             // 这里可以自己修改返回
             if (_leftBarButtonItem) {
                 controller.topViewController.navigationItem.leftBarButtonItem=_leftBarButtonItem;
@@ -77,6 +73,9 @@
             }
             
         }
+        UIView *view=controller.view;
+        view.frame=self.view.bounds;
+        [self addChildViewController:controller];
     }
     
     // 默认选中第一个控制器
