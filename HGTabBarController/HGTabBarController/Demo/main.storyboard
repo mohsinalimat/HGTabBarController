@@ -87,17 +87,18 @@
                         <segue destination="iSl-HM-SoU" kind="relationship" relationship="viewControllers" id="Hbw-UE-Kf3"/>
                         <segue destination="nda-0q-pOa" kind="relationship" relationship="viewControllers" id="obD-jE-RzS"/>
                         <segue destination="br7-WJ-P2n" kind="relationship" relationship="viewControllers" id="UPC-Uk-Dhs"/>
+                        <segue destination="ukS-rp-Pou" kind="relationship" relationship="viewControllers" id="lZb-db-Ldt"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BkW-yK-fEy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-8" y="1303"/>
         </scene>
-        <!--主要-->
+        <!--首页-->
         <scene sceneID="Hhy-xK-vGk">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="iSl-HM-SoU" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="主要" image="tabbar_home" badgeValue="1" id="jus-uW-KdO"/>
+                    <tabBarItem key="tabBarItem" title="首页" image="tabbar_home" badgeValue="11" selectedImage="tabbar_home_highlighted" id="jus-uW-KdO"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="z34-DZ-hxJ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -132,11 +133,11 @@
             </objects>
             <point key="canvasLocation" x="1750" y="2684"/>
         </scene>
-        <!--无关-->
+        <!--消息-->
         <scene sceneID="Bda-Cu-Z5W">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="nda-0q-pOa" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="无关" image="tabbar_profile" id="8vz-8D-R2i"/>
+                    <tabBarItem key="tabBarItem" title="消息" image="tabbar_message_center" badgeValue="1" selectedImage="tabbar_message_center_highlighted" id="8vz-8D-R2i"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="NDZ-fu-AH9">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -151,11 +152,11 @@
             </objects>
             <point key="canvasLocation" x="900" y="1664"/>
         </scene>
-        <!--无关-->
+        <!--发现-->
         <scene sceneID="2qv-8C-ETb">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="br7-WJ-P2n" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="无关" image="tabbar_profile" id="UI7-mq-ikO"/>
+                    <tabBarItem key="tabBarItem" title="发现" image="tabbar_discover" badgeValue="1" selectedImage="tabbar_discover_highlighted" id="UI7-mq-ikO"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="uZh-Gw-8Q5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -170,9 +171,54 @@
             </objects>
             <point key="canvasLocation" x="892" y="2481"/>
         </scene>
+        <!--我-->
+        <scene sceneID="lgK-A5-ZM7">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ukS-rp-Pou" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="我" image="tabbar_profile" badgeValue="1" selectedImage="tabbar_profile_highlighted" id="tlg-QO-ja9"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kRX-Fp-fA4">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="F1y-HJ-uJy" kind="relationship" relationship="rootViewController" id="27c-Nu-T3Y"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1aa-j5-JUJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="910" y="3251"/>
+        </scene>
+        <!--Item 2-->
+        <scene sceneID="JeU-RC-MJm">
+            <objects>
+                <viewController id="F1y-HJ-uJy" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jbY-LJ-Dee"/>
+                        <viewControllerLayoutGuide type="bottom" id="E4L-hx-JIf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="CMo-jv-TrC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item 2" id="vK1-JG-J1L"/>
+                    <navigationItem key="navigationItem" id="mYH-CB-7ne"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VvC-pT-m3D" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1718" y="3374"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="tabbar_discover" width="30" height="30"/>
+        <image name="tabbar_discover_highlighted" width="30" height="30"/>
         <image name="tabbar_home" width="30" height="30"/>
+        <image name="tabbar_home_highlighted" width="30" height="30"/>
+        <image name="tabbar_message_center" width="30" height="30"/>
+        <image name="tabbar_message_center_highlighted" width="30" height="30"/>
         <image name="tabbar_profile" width="30" height="30"/>
+        <image name="tabbar_profile_highlighted" width="30" height="30"/>
     </resources>
 </document>

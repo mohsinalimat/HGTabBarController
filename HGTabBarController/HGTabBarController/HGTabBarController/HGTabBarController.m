@@ -10,6 +10,7 @@
 #import "HGTabBar.h"
 
 @interface HGTabBarController ()<HGTabBarDelegate,UINavigationControllerDelegate>
+
 @property (nonatomic, strong) UIView            *currentView; // <-当前的视图view
 @property (nonatomic, assign) BOOL  isNavigationController;// <- 子控制器都是导航控制器
 
@@ -40,7 +41,6 @@
 
 - (void)setupControllers
 {
-    
     for (NSInteger i=0; i<_viewControllers.count; i++) {
         UINavigationController *controller=(UINavigationController *)_viewControllers[i];
         if([controller isKindOfClass:[UINavigationController class]]){
@@ -49,7 +49,7 @@
             self.navigationController.navigationBar.hidden=YES;
             controller.topViewController.title=_tabBar.titles[i];
             
-            // 这里可以自己修改返回
+            // 这里需要自己根据项目需求实现
             if (_leftBarButtonItem) {
                 controller.topViewController.navigationItem.leftBarButtonItem=_leftBarButtonItem;
             }else{
@@ -59,7 +59,6 @@
                                                target:self
                                                action:@selector(back)];
             }
-            
         }
         UIView *view=controller.view;
         view.frame=self.view.bounds;
@@ -91,6 +90,7 @@
     _selectedIndex=selectedIndex;
 }
 
+// 这里需要自己根据项目需求实现
 - (void)back
 {
     self.navigationController.navigationBar.hidden=NO;
@@ -113,7 +113,6 @@
     _currentView=self.viewControllers[index].view;
     [self.view addSubview:_currentView];
     [self.view addSubview:_tabBar];
-    
     if(!_isNavigationController) self.title=_tabBar.titles[index];
     
     // 3.返回状态和更新代理方法
@@ -125,6 +124,7 @@
     }
     
 }
+
 #pragma mark - UINavigationControllerDelegate
 -(void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
@@ -158,8 +158,11 @@
     }
     
     HGTabBar *tabBar=tabBarController.tabBar;
+    HGTabbarButton *tabBarItem=tabBar.subviews.firstObject.subviews[index];
     
-    return tabBar.subviews.firstObject.subviews[index];
+    NSAssert([tabBarItem isKindOfClass:[HGTabbarButton class]],@"%@必须是HGTabbarButton类或其子类才能设置`badgeValue`",tabBarItem);
+    
+    return tabBarItem;
 }
 
 - (HGTabBarController *)hg_tabBarController

@@ -15,6 +15,8 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    [UITabBar appearance].tintColor=[UIColor orangeColor];
     return YES;
 }
 

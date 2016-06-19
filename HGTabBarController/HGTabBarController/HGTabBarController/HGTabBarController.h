@@ -22,18 +22,18 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nullable, nonatomic, assign) __kindof UIViewController *selectedViewController;
 
 /// 当前选中的控制器的索引
-@property(nonatomic) NSUInteger selectedIndex;
+@property(nonatomic, assign) NSUInteger selectedIndex;
 
 /// tabBar高度,默认49,和原生的一样
-@property (nonatomic, assign) CGFloat  tabBarHeight;
+@property(nonatomic, assign) CGFloat  tabBarHeight;
 
 /// tabBar,可以自定义
 @property(nonatomic, readwrite) HGTabBar *tabBar;
 
 /// 代理
-@property (nonatomic, assign) id<HGTabBarControllerDelegate> delegate;
+@property(nonatomic, assign) id<HGTabBarControllerDelegate> delegate;
 
-/// 返回按钮
+/// 返回按钮,需要自己根据项目需求实现,.m文件内需要修改
 @property(nullable, nonatomic,strong) UIBarButtonItem *leftBarButtonItem;
 
 @end

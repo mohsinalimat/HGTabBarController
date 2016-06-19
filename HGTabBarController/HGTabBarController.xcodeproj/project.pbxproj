@@ -96,12 +96,12 @@
 		660F75551D0BE00800B25325 /* Demo */ = {
 			isa = PBXGroup;
 			children = (
+				66D8CC8F1D14FBA6006040A7 /* ViewController.h */,
+				66D8CC901D14FBA6006040A7 /* ViewController.m */,
 				660F760E1D14525000B25325 /* DemoViewController.h */,
 				660F760F1D14525000B25325 /* DemoViewController.m */,
 				660F76101D14525000B25325 /* DemoViewController.xib */,
 				66D8CC8D1D14FB8D006040A7 /* Main.storyboard */,
-				66D8CC8F1D14FBA6006040A7 /* ViewController.h */,
-				66D8CC901D14FBA6006040A7 /* ViewController.m */,
 				66C2F9721D154E7B006F5C14 /* Demo1ViewController.h */,
 				66C2F9731D154E7B006F5C14 /* Demo1ViewController.m */,
 				66C2F9741D154E7B006F5C14 /* Demo1ViewController.xib */,

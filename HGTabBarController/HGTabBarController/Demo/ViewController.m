@@ -27,6 +27,7 @@
 
 - (void )pushNeedNav:(BOOL)flag {
 
+    
     HGTabBar *tabbar=[[HGTabBar alloc]init];
     [tabbar tabbarWithTitles:@[@"首页",@"消息",@"发现",@"我"]
                titleNorColor:[UIColor grayColor]
@@ -41,9 +42,17 @@
                                @"tabbar_discover_highlighted",
                                @"tabbar_profile_highlighted"]];
     if(!flag) tabbar.buttonAlignment=HGTabBarButtonVertical;
+    
+    // 替换掉第三个按钮,测试
+    UIButton *btn=[[UIButton alloc]init];
+    btn.backgroundColor=[UIColor redColor];
+    [btn setTitle:@"替换" forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    btn.frame=CGRectMake(self.view.bounds.size.width/2, -6, self.view.bounds.size.width/4, 55);
+    [tabbar replaceBarTabBarItemIndex:2 tabBarItem:btn];
+    
     HGTabBarController *tb=[[HGTabBarController alloc]init];
     tb.tabBar=tabbar;
-//    tb.tabBarHeight=49;
     
     NSMutableArray *controllers=[NSMutableArray arrayWithCapacity:0];
     for (NSInteger i=0; i<4; i++) {

@@ -33,15 +33,15 @@
                selImges:(NSArray<NSString *> *)selImges
 {
     
-    UIView *tabBarBackgroundView=[[UIView alloc]init];
-    tabBarBackgroundView.backgroundColor=TabBarbackColor;
-    [self addSubview:tabBarBackgroundView];
-    _tabBarBackgroundView=tabBarBackgroundView;
-    
     UIImageView *splitLine=[[UIImageView alloc]init];
     splitLine.backgroundColor=[UIColor colorWithWhite:0.7 alpha:1.0f];
     [self addSubview:splitLine];
     _splitLine=splitLine;
+    
+    UIView *tabBarBackgroundView=[[UIView alloc]init];
+    tabBarBackgroundView.backgroundColor=TabBarbackColor;
+    [self addSubview:tabBarBackgroundView];
+    _tabBarBackgroundView=tabBarBackgroundView;
     
     for (NSInteger i=0; i<normalImges.count; i++) {
         // 创建按钮
@@ -100,8 +100,13 @@
     
     //按钮的frame
     for (HGTabbarButton *btn in _tabBarBackgroundView.subviews) {
-        btn.frame = CGRectMake(btnW * btn.tag, 1, btnW, btnH-1);
-        btn.buttonAlignment=_buttonAlignment;
+        if ([btn isKindOfClass:[HGTabbarButton class]] ) {
+            btn.frame = CGRectMake(btnW * btn.tag, 1, btnW, btnH-1);
+            btn.buttonAlignment=_buttonAlignment;
+        }else{
+            btn.frame=btn.frame;
+        }
+        
     }
     
 }
@@ -112,7 +117,15 @@
     
     [self btnClick:_tabBarBackgroundView.subviews[selectedIndex]];
 }
-
+- (void)replaceBarTabBarItemIndex:(NSUInteger )index tabBarItem:(UIButton *)tabBarItem;
+{
+    [_tabBarBackgroundView.subviews[index] removeFromSuperview];
+    [tabBarItem addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchDown];
+    tabBarItem.tag=index;
+    [_tabBarBackgroundView insertSubview:tabBarItem atIndex:index];
+    [self setNeedsLayout];
+    [self layoutIfNeeded];
+}
 // 按钮点击事件
 -(void)btnClick:(UIButton *)btn{
     
@@ -142,7 +155,7 @@
         self.titleLabel.textAlignment=NSTextAlignmentCenter;
         CGSize  imageSize=self.imageView.frame.size;
         CGSize  titleSize=self.titleLabel.frame.size;
-        self.titleEdgeInsets =UIEdgeInsetsMake(0.5*imageSize.height, -0.5*imageSize.width, -0.5*imageSize.height, 0.5*imageSize.width);
+        self.titleEdgeInsets =UIEdgeInsetsMake(0.5*imageSize.height+2, -0.5*imageSize.width, -0.5*imageSize.height-2, 0.5*imageSize.width);
         self.imageEdgeInsets =UIEdgeInsetsMake(-0.5*titleSize.height, 0.5*titleSize.width, 0.5*titleSize.height, -0.5*titleSize.width);
         
     }
@@ -153,15 +166,15 @@
     if (_buttonAlignment == HGTabBarButtonHorizontal)   return;
     if (_badgeValue.length > 2) _badgeValue=[_badgeValue substringToIndex:2];
     
-    CGFloat height=20;
-    CGFloat marginX=7;
+    CGFloat height=18;
+    CGFloat marginX=4.5f;
     CGFloat marginY=2;
     CGFloat arcX=CGRectGetMaxX(self.imageView.frame)+marginX;
     CGFloat arcY=marginY+height *0.5;
     
     NSDictionary *attr=@{
                          NSForegroundColorAttributeName:[UIColor whiteColor],
-                         NSFontAttributeName:TabBarButtonFont
+                         NSFontAttributeName:[UIFont systemFontOfSize:14.0f]
                          };
     
     CGSize size=[_badgeValue sizeWithAttributes:attr];

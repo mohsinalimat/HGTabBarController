@@ -17,6 +17,7 @@ typedef NS_ENUM(NSInteger,HGTabBarButtonAlignment)
     HGTabBarButtonVertical  // 垂直
 };
 
+@class HGTabbarButton;
 @protocol HGTabBarDelegate;
 
 @interface HGTabBar : UIView
@@ -35,10 +36,10 @@ typedef NS_ENUM(NSInteger,HGTabBarButtonAlignment)
 -(void)tabbarWithTitles:(nullable NSArray <NSString *> *)titles
           titleNorColor:(UIColor *)normalColor
           titleSelColor:(UIColor *)selectedColor
-           normalImages:(nonnull NSArray <NSString *> *)normalImges
-               selImges:(nonnull NSArray <NSString *> *)selImges;
+           normalImages:(nonnull  NSArray <NSString *> *)normalImges
+               selImges:(nonnull  NSArray <NSString *> *)selImges;
 
-/// 所有控制器的标题
+/// 所有子控制器的导航栏标题
 @property (nonatomic, strong,readonly) NSArray *titles;
 /// 字体, default is 12
 @property (nonatomic, strong) UIFont *font;
@@ -47,6 +48,8 @@ typedef NS_ENUM(NSInteger,HGTabBarButtonAlignment)
 /// 按钮对齐方式,默认水平
 @property (nonatomic)HGTabBarButtonAlignment  buttonAlignment;
 
+/// 替换索引为index的按钮
+- (void)replaceBarTabBarItemIndex:(NSUInteger )index tabBarItem:(nonnull UIButton *)tabBarItem;
 @end
 
 //___________________________________________________________________________________________________
