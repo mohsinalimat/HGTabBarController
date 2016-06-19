@@ -4,13 +4,13 @@
 //
 //  Created by 查昊 on 16/6/11.
 //  Copyright © 2016年 Zohar. All rights reserved.
-//
+//  GitHub:https://github.com/zhahao/HGTabBarController
 
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class HGTabBar;
+@class HGTabBar,HGTabbarButton;
 @protocol HGTabBarControllerDelegate;
 
 @interface HGTabBarController : UIViewController
@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nullable, nonatomic, assign) __kindof UIViewController *selectedViewController;
 
 /// 当前选中的控制器的索引
-@property(nonatomic,readonly) NSUInteger selectedIndex;
+@property(nonatomic) NSUInteger selectedIndex;
 
 /// tabBar高度,默认49,和原生的一样
 @property (nonatomic, assign) CGFloat  tabBarHeight;
@@ -44,5 +44,16 @@ NS_ASSUME_NONNULL_BEGIN
 /// 选中控制器之后
 - (void)tabBarController:(HGTabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController;
 @end
+
+
+@interface UIViewController (HGTabBarController)
+
+@property(null_resettable, nonatomic, strong) HGTabbarButton *hg_tabBarItem; // Automatically created lazily with the view controller's title if it's not set explicitly.
+
+@property(nullable, nonatomic, readonly, strong) HGTabBarController *hg_tabBarController; // If the view controller has a tab bar controller as its ancestor, return it. Returns nil otherwise.
+
+@end
+
+
 NS_ASSUME_NONNULL_END
 

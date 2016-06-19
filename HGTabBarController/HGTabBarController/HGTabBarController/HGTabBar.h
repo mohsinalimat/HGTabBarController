@@ -4,11 +4,18 @@
 //
 //  Created by 查昊 on 16/6/11.
 //  Copyright © 2016年 Zohar. All rights reserved.
-//
+//  GitHub:https://github.com/zhahao/HGTabBarController
 
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
+
+/* 按钮排列方式 */
+typedef NS_ENUM(NSInteger,HGTabBarButtonAlignment)
+{
+    HGTabBarButtonHorizontal =0,// 水平
+    HGTabBarButtonVertical  // 垂直
+};
 
 @protocol HGTabBarDelegate;
 
@@ -33,16 +40,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 所有控制器的标题
 @property (nonatomic, strong,readonly) NSArray *titles;
-/// 字体
-@property (nonatomic, strong) UIFont *font;// default is 12
+/// 字体, default is 12
+@property (nonatomic, strong) UIFont *font;
 /// 选择按钮索引
 @property (nonatomic, assign,readwrite) NSUInteger  selectedIndex;
-
-/// 内部按钮的一些间距
-@property (nonatomic) UIEdgeInsets  titleEdgeInsets;// default is UIEdgeInsetsZero
-@property (nonatomic) UIEdgeInsets  imageEdgeInsets;// default is UIEdgeInsetsZero
-@property (nonatomic) UIEdgeInsets  contentEdgeInsets;// default is UIEdgeInsetsZero
-@property (nonatomic) NSTextAlignment textAlignment;// default is NSTextAlignmentLeft
+/// 按钮对齐方式,默认水平
+@property (nonatomic)HGTabBarButtonAlignment  buttonAlignment;
 
 @end
 
@@ -55,5 +58,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+//自定义按钮
+@interface HGTabbarButton : UIButton
+
+@property(nullable, nonatomic, copy) NSString *badgeValue;    // default is nil
+
+@end
 
 NS_ASSUME_NONNULL_END

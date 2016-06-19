@@ -28,7 +28,7 @@
 - (void )pushNeedNav:(BOOL)flag {
 
     HGTabBar *tabbar=[[HGTabBar alloc]init];
-    [tabbar tabbarWithTitles:@[@"首页",@"消息",@"发现",@"我"]
+    [tabbar tabbarWithTitles:nil
                titleNorColor:[UIColor grayColor]
                titleSelColor:[UIColor orangeColor]
                 normalImages:@[@"tabbar_home",
@@ -40,7 +40,7 @@
                                @"tabbar_message_center_highlighted",
                                @"tabbar_discover_highlighted",
                                @"tabbar_profile_highlighted"]];
-    
+    if(!flag) tabbar.buttonAlignment=HGTabBarButtonVertical;
     HGTabBarController *tb=[[HGTabBarController alloc]init];
     tb.tabBar=tabbar;
     tb.tabBarHeight=44;
@@ -67,5 +67,11 @@
     return nav;
     
 }
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+}
+
 
 @end

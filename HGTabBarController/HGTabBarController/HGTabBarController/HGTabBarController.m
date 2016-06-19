@@ -27,28 +27,14 @@
 {
     [super viewDidAppear:animated];
     
-    if (!_isNavigationController) {
-        _tabBar.hidden=NO;
-    }
+    if (!_isNavigationController)   _tabBar.hidden=NO;
 }
+
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     
-    if (!_isNavigationController) {
-        _tabBar.hidden=NO;
-    }
-    
-}
-
-- (void)setupTabBar
-{
-    CGFloat height=_tabBarHeight >0 ? _tabBarHeight : 49;
-    _tabBar.backgroundColor=[UIColor whiteColor];
-    _tabBar.frame=CGRectMake(0, self.view.frame.size.height-height, self.view.frame.size.width, height);
-    [self.view addSubview:_tabBar];
-    _tabBar.delegate=self;
-    
+    if (!_isNavigationController)   _tabBar.hidden=NO;
 }
 
 - (void)setupControllers
@@ -66,7 +52,7 @@
                 controller.topViewController.navigationItem.leftBarButtonItem=_leftBarButtonItem;
             }else{
                 controller.topViewController.navigationItem.leftBarButtonItem =
-                [[UIBarButtonItem alloc]initWithTitle:@"返回"
+                [[UIBarButtonItem alloc]initWithTitle:@"< 返回"
                                                 style:UIBarButtonItemStylePlain
                                                target:self
                                                action:@selector(back)];
@@ -84,8 +70,19 @@
     _selectedIndex=0;
     if(!_isNavigationController) self.title=_tabBar.titles[_selectedIndex];
     [self.view addSubview:_currentView];
-
+    
 }
+
+- (void)setupTabBar
+{
+    CGFloat height=_tabBarHeight >0 ? _tabBarHeight : 49;
+    _tabBar.backgroundColor=[UIColor whiteColor];
+    _tabBar.frame=CGRectMake(0, self.view.frame.size.height-height, self.view.frame.size.width, height);
+    [self.view addSubview:_tabBar];
+    _tabBar.delegate=self;
+    
+}
+
 - (void)setSelectedIndex:(NSUInteger)selectedIndex
 {
     _tabBar.selectedIndex=selectedIndex;
@@ -134,10 +131,43 @@
     }else{
         [self.view addSubview:_tabBar];
     }
-
 }
 
 @end
 
+
+@implementation UIViewController (HGTabBarController)
+
+-(void)setHg_tabBarItem:(HGTabbarButton *)hg_tabBarItem
+{
+    self.hg_tabBarItem=hg_tabBarItem;
+}
+
+-(HGTabbarButton *)hg_tabBarItem
+{
+    HGTabBarController *tabBarController=self.hg_tabBarController;
+    NSUInteger index=0;
+    if ([self.parentViewController isKindOfClass:[UINavigationController class]]) {
+        index=[tabBarController.viewControllers indexOfObject:self.parentViewController];
+    }
+    else
+    {
+        index=[tabBarController.viewControllers indexOfObject:self];
+    }
+    
+    HGTabBar *tabBar=tabBarController.tabBar;
+    
+    return tabBar.subviews.firstObject.subviews[index];
+}
+
+- (HGTabBarController *)hg_tabBarController
+{
+    if ([self.parentViewController isKindOfClass:[UINavigationController class]]) {
+        return (HGTabBarController *)self.parentViewController.parentViewController;
+    }
+    return (HGTabBarController *)self.parentViewController;
+}
+
+@end
 
 
