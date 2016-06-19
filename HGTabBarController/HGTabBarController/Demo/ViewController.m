@@ -28,7 +28,7 @@
 - (void )pushNeedNav:(BOOL)flag {
 
     HGTabBar *tabbar=[[HGTabBar alloc]init];
-    [tabbar tabbarWithTitles:nil
+    [tabbar tabbarWithTitles:@[@"首页",@"消息",@"发现",@"我"]
                titleNorColor:[UIColor grayColor]
                titleSelColor:[UIColor orangeColor]
                 normalImages:@[@"tabbar_home",
@@ -43,7 +43,7 @@
     if(!flag) tabbar.buttonAlignment=HGTabBarButtonVertical;
     HGTabBarController *tb=[[HGTabBarController alloc]init];
     tb.tabBar=tabbar;
-    tb.tabBarHeight=44;
+//    tb.tabBarHeight=49;
     
     NSMutableArray *controllers=[NSMutableArray arrayWithCapacity:0];
     for (NSInteger i=0; i<4; i++) {

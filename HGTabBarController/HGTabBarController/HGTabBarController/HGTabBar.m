@@ -9,7 +9,7 @@
 #import "HGTabBar.h"
 
 #define TabBarbackColor   [UIColor  colorWithRed:245/255.0 green:245/255.0 blue:245/255.0 alpha:0.9]
-#define TabBarButtonFont  [UIFont systemFontOfSize:12.0f]
+#define TabBarButtonFont  [UIFont systemFontOfSize:10.0f]
 
 @interface HGTabbarButton ()
 

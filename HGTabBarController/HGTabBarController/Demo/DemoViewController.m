@@ -16,11 +16,10 @@
 
 @implementation DemoViewController
 - (IBAction)push:(id)sender {
-//    Demo1ViewController *demo1=[[Demo1ViewController alloc]init];
-//    
-//    [self.navigationController pushViewController:demo1 animated:YES];
+    Demo1ViewController *demo1=[[Demo1ViewController alloc]init];
+    
+    [self.navigationController pushViewController:demo1 animated:YES];
     self.hg_tabBarItem.badgeValue=@"2222";
-//    self.hg_tabBarController.selectedIndex=2;
 }
 
 - (void)viewDidLoad {

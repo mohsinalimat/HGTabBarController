@@ -35,10 +35,12 @@
     [super viewWillDisappear:animated];
     
     if (!_isNavigationController)   _tabBar.hidden=NO;
+    self.navigationController.navigationBar.hidden=NO;
 }
 
 - (void)setupControllers
 {
+    
     for (NSInteger i=0; i<_viewControllers.count; i++) {
         UINavigationController *controller=(UINavigationController *)_viewControllers[i];
         if([controller isKindOfClass:[UINavigationController class]]){
@@ -135,7 +137,7 @@
 
 @end
 
-
+#pragma mark - UIViewController分类
 @implementation UIViewController (HGTabBarController)
 
 -(void)setHg_tabBarItem:(HGTabbarButton *)hg_tabBarItem
