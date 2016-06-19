@@ -44,7 +44,7 @@
     if(!flag) tabbar.buttonAlignment=HGTabBarButtonVertical;
     
     // 替换掉第三个按钮,测试
-    UIButton *btn=[[UIButton alloc]init];
+    HGTabbarButton *btn=[[HGTabbarButton alloc]init];
     btn.backgroundColor=[UIColor redColor];
     [btn setTitle:@"替换" forState:UIControlStateNormal];
     [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];

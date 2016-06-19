@@ -22,8 +22,18 @@
 @property (nonatomic,weak)UIButton    *selectedBtn;// <-当前选中的按钮
 @property (nonatomic,weak)UIImageView *splitLine;// <-分割线
 @property (nonatomic,weak)UIView      *tabBarBackgroundView;// <-背景View
+@property (nonatomic,strong)NSMutableArray *replaceIndexes;
+
 @end
 @implementation HGTabBar
+
+-(instancetype)initWithFrame:(CGRect)frame
+{
+    if (self=[super initWithFrame:frame]) {
+        self.replaceIndexes=[NSMutableArray arrayWithCapacity:0];
+    }
+    return self;
+}
 
 #pragma mark 初始化按钮
 -(void)tabbarWithTitles:(NSArray<NSString *> *)titles
@@ -100,13 +110,8 @@
     
     //按钮的frame
     for (HGTabbarButton *btn in _tabBarBackgroundView.subviews) {
-        if ([btn isKindOfClass:[HGTabbarButton class]] ) {
             btn.frame = CGRectMake(btnW * btn.tag, 1, btnW, btnH-1);
             btn.buttonAlignment=_buttonAlignment;
-        }else{
-            btn.frame=btn.frame;
-        }
-        
     }
     
 }
@@ -117,11 +122,12 @@
     
     [self btnClick:_tabBarBackgroundView.subviews[selectedIndex]];
 }
-- (void)replaceBarTabBarItemIndex:(NSUInteger )index tabBarItem:(UIButton *)tabBarItem;
+- (void)replaceBarTabBarItemIndex:(NSUInteger )index tabBarItem:(HGTabbarButton *)tabBarItem;
 {
     [_tabBarBackgroundView.subviews[index] removeFromSuperview];
     [tabBarItem addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchDown];
     tabBarItem.tag=index;
+    [self.replaceIndexes addObject:@(index)];
     [_tabBarBackgroundView insertSubview:tabBarItem atIndex:index];
     [self setNeedsLayout];
     [self layoutIfNeeded];

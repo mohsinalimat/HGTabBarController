@@ -49,7 +49,7 @@ typedef NS_ENUM(NSInteger,HGTabBarButtonAlignment)
 @property (nonatomic)HGTabBarButtonAlignment  buttonAlignment;
 
 /// 替换索引为index的按钮
-- (void)replaceBarTabBarItemIndex:(NSUInteger )index tabBarItem:(nonnull UIButton *)tabBarItem;
+- (void)replaceBarTabBarItemIndex:(NSUInteger )index tabBarItem:(nonnull HGTabbarButton *)tabBarItem;
 @end
 
 //___________________________________________________________________________________________________

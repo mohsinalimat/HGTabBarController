@@ -160,7 +160,7 @@
     HGTabBar *tabBar=tabBarController.tabBar;
     HGTabbarButton *tabBarItem=tabBar.subviews.firstObject.subviews[index];
     
-    NSAssert([tabBarItem isKindOfClass:[HGTabbarButton class]],@"%@必须是HGTabbarButton类或其子类才能设置`badgeValue`",tabBarItem);
+//    NSAssert([tabBarItem isKindOfClass:[HGTabbarButton class]],@"%@必须是HGTabbarButton类或其子类才能设置`badgeValue`",tabBarItem);
     
     return tabBarItem;
 }
