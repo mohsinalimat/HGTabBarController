@@ -41,19 +41,23 @@ typedef NS_ENUM(NSInteger,HGTabBarButtonAlignment)
 
 /// 所有子控制器的导航栏标题
 @property (nonatomic, strong,readonly) NSArray *titles;
+
 /// 字体, default is 12
 @property (nonatomic, strong) UIFont *font;
+
 /// 选择按钮索引
 @property (nonatomic, assign,readwrite) NSUInteger  selectedIndex;
+
 /// 按钮对齐方式,默认水平
 @property (nonatomic)HGTabBarButtonAlignment  buttonAlignment;
+
+@property (nonatomic,weak ,readonly)UIView      *tabBarBackgroundView;// <-背景View
 
 /// 替换索引为index的按钮
 - (void)replaceBarTabBarItemIndex:(NSUInteger )index tabBarItem:(nonnull HGTabbarButton *)tabBarItem;
 @end
 
 //___________________________________________________________________________________________________
-
 @protocol HGTabBarDelegate<NSObject>
 @optional
 

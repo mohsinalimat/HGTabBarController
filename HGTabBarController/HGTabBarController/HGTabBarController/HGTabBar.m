@@ -17,20 +17,17 @@
 
 @end
 
-
 @interface HGTabBar ()
 @property (nonatomic,weak)UIButton    *selectedBtn;// <-当前选中的按钮
 @property (nonatomic,weak)UIImageView *splitLine;// <-分割线
-@property (nonatomic,weak)UIView      *tabBarBackgroundView;// <-背景View
-@property (nonatomic,strong)NSMutableArray *replaceIndexes;
-
+@property (nonatomic,strong)NSMutableSet *replaceIndexes;
 @end
 @implementation HGTabBar
 
 -(instancetype)initWithFrame:(CGRect)frame
 {
     if (self=[super initWithFrame:frame]) {
-        self.replaceIndexes=[NSMutableArray arrayWithCapacity:0];
+        self.replaceIndexes=[NSMutableSet setWithCapacity:0];
     }
     return self;
 }
@@ -97,12 +94,12 @@
     self.backgroundColor=TabBarbackColor;
     
     //背景View的frame
-    _tabBarBackgroundView.frame=self.bounds;
+    _tabBarBackgroundView.frame = self.bounds;
     
     //分割线的frame
     NSInteger count = _tabBarBackgroundView.subviews.count;
-    CGFloat width=_tabBarBackgroundView.bounds.size.width;
-    _splitLine.frame=CGRectMake(0,-0.5f,width,0.5f);
+    CGFloat width = _tabBarBackgroundView.bounds.size.width;
+    _splitLine.frame = CGRectMake(0,-0.5f,width,0.5f);
     
     //按钮宽度与高度
     CGFloat btnW =  width/ count;
@@ -110,8 +107,12 @@
     
     //按钮的frame
     for (HGTabbarButton *btn in _tabBarBackgroundView.subviews) {
+        if ([_replaceIndexes containsObject:@(btn.tag)]) {
+            btn.frame=btn.frame;
+        }else{
             btn.frame = CGRectMake(btnW * btn.tag, 1, btnW, btnH-1);
-            btn.buttonAlignment=_buttonAlignment;
+        }
+            btn.buttonAlignment = _buttonAlignment;
     }
     
 }
@@ -161,8 +162,8 @@
         self.titleLabel.textAlignment=NSTextAlignmentCenter;
         CGSize  imageSize=self.imageView.frame.size;
         CGSize  titleSize=self.titleLabel.frame.size;
-        self.titleEdgeInsets =UIEdgeInsetsMake(0.5*imageSize.height+2, -0.5*imageSize.width, -0.5*imageSize.height-2, 0.5*imageSize.width);
-        self.imageEdgeInsets =UIEdgeInsetsMake(-0.5*titleSize.height, 0.5*titleSize.width, 0.5*titleSize.height, -0.5*titleSize.width);
+        self.titleEdgeInsets = UIEdgeInsetsMake(0.5*imageSize.height+2, -0.5*imageSize.width, -0.5*imageSize.height-2, 0.5*imageSize.width);
+        self.imageEdgeInsets = UIEdgeInsetsMake(-0.5*titleSize.height, 0.5*titleSize.width, 0.5*titleSize.height, -0.5*titleSize.width);
         
     }
 }
@@ -176,6 +177,7 @@
     CGFloat marginX=4.5f;
     CGFloat marginY=2;
     CGFloat arcX=CGRectGetMaxX(self.imageView.frame)+marginX;
+    
     CGFloat arcY=marginY+height *0.5;
     
     NSDictionary *attr=@{

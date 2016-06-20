@@ -28,15 +28,15 @@
 {
     [super viewDidAppear:animated];
     
-    if (!_isNavigationController)   _tabBar.hidden=NO;
+    if (!_isNavigationController)   _tabBar.hidden = NO;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     
-    if (!_isNavigationController)   _tabBar.hidden=NO;
-    self.navigationController.navigationBar.hidden=NO;
+    if (!_isNavigationController)   _tabBar.hidden = NO;
+    self.navigationController.navigationBar.hidden = NO;
 }
 
 - (void)setupControllers
@@ -158,10 +158,8 @@
     }
     
     HGTabBar *tabBar=tabBarController.tabBar;
-    HGTabbarButton *tabBarItem=tabBar.subviews.firstObject.subviews[index];
-    
-//    NSAssert([tabBarItem isKindOfClass:[HGTabbarButton class]],@"%@必须是HGTabbarButton类或其子类才能设置`badgeValue`",tabBarItem);
-    
+    HGTabbarButton *tabBarItem=tabBar.tabBarBackgroundView.subviews[index];
+        
     return tabBarItem;
 }
 

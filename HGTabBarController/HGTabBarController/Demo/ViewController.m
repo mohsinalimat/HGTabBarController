@@ -45,8 +45,10 @@
     
     // 替换掉第三个按钮,测试
     HGTabbarButton *btn=[[HGTabbarButton alloc]init];
-    btn.backgroundColor=[UIColor redColor];
+    btn.backgroundColor=[UIColor greenColor];
     [btn setTitle:@"替换" forState:UIControlStateNormal];
+    [btn setImage:[UIImage imageNamed:@"tabbar_discover_highlighted"] forState:UIControlStateSelected];
+    
     [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     btn.frame=CGRectMake(self.view.bounds.size.width/2, -6, self.view.bounds.size.width/4, 55);
     [tabbar replaceBarTabBarItemIndex:2 tabBarItem:btn];
