@@ -51,8 +51,6 @@ typedef NS_ENUM(NSInteger,HGTabBarButtonAlignment)
 /// 按钮对齐方式,默认水平
 @property (nonatomic)HGTabBarButtonAlignment  buttonAlignment;
 
-@property (nonatomic,weak ,readonly)UIView      *tabBarBackgroundView;// <-背景View
-
 /// 替换索引为index的按钮
 - (void)replaceBarTabBarItemIndex:(NSUInteger )index tabBarItem:(nonnull HGTabbarButton *)tabBarItem;
 @end

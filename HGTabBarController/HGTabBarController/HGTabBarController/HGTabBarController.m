@@ -21,9 +21,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupControllers];
-    [self setupTabBar];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self setupTabBar];
+}
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
@@ -60,6 +64,7 @@
                                                action:@selector(back)];
             }
         }
+        
         UIView *view=controller.view;
         view.frame=self.view.bounds;
         [self addChildViewController:controller];
@@ -151,16 +156,13 @@
     NSUInteger index=0;
     if ([self.parentViewController isKindOfClass:[UINavigationController class]]) {
         index=[tabBarController.viewControllers indexOfObject:self.parentViewController];
-    }
-    else
-    {
+    }else{
         index=[tabBarController.viewControllers indexOfObject:self];
     }
     
     HGTabBar *tabBar=tabBarController.tabBar;
-    HGTabbarButton *tabBarItem=tabBar.tabBarBackgroundView.subviews[index];
-        
-    return tabBarItem;
+    
+    return tabBar.subviews[1].subviews[index];
 }
 
 - (HGTabBarController *)hg_tabBarController

@@ -16,7 +16,7 @@
     // push到demo1
     Demo1ViewController *demo1=[[Demo1ViewController alloc]init];
     [self.navigationController pushViewController:demo1 animated:YES];
-    self.hg_tabBarItem.badgeValue=@"1"; // 设置提醒小红点
+    self.hg_tabBarItem.badgeValue=@"122"; // 设置提醒小红点
 }
 
 - (void)viewDidLoad {

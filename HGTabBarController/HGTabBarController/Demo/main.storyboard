@@ -98,7 +98,7 @@
         <scene sceneID="Hhy-xK-vGk">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="iSl-HM-SoU" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="首页" image="tabbar_home" badgeValue="11" selectedImage="tabbar_home_highlighted" id="jus-uW-KdO"/>
+                    <tabBarItem key="tabBarItem" title="首页" image="tabbar_home" badgeValue="111111111111" selectedImage="tabbar_home_highlighted" id="jus-uW-KdO"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="z34-DZ-hxJ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

@@ -9,7 +9,10 @@
 #import "HGTabBar.h"
 
 #define TabBarbackColor   [UIColor  colorWithRed:245/255.0 green:245/255.0 blue:245/255.0 alpha:0.9]
-#define TabBarButtonFont  [UIFont systemFontOfSize:10.0f]
+#define TabBarButtonFont  [UIFont systemFontOfSize:14.0f]
+
+
+static NSString * const HGTabbarButtonBadgeValueChangedNotification=@"HGTabbarButtonBadgeValueChangedNotification";
 
 @interface HGTabbarButton ()
 
@@ -18,20 +21,34 @@
 @end
 
 @interface HGTabBar ()
-@property (nonatomic,weak)UIButton    *selectedBtn;// <-当前选中的按钮
-@property (nonatomic,weak)UIImageView *splitLine;// <-分割线
-@property (nonatomic,strong)NSMutableSet *replaceIndexes;
+@property (nonatomic,weak) UIImageView *splitLine;// <-分割线
+@property (nonatomic,weak) UIButton *selectedBtn;// <-当前选中的按钮
+@property (nonatomic,weak) UIView *tabBarBackgroundView;// <-背景View
+@property (nonatomic,strong) NSMutableSet *replaceIndexes;// <- 被替换掉得按钮索引集合
+@property (nonatomic,strong) NSMutableDictionary *badgeValueDict;
+
 @end
 @implementation HGTabBar
 
 -(instancetype)initWithFrame:(CGRect)frame
 {
     if (self=[super initWithFrame:frame]) {
-        self.replaceIndexes=[NSMutableSet setWithCapacity:0];
+        [self setupSettings];
     }
     return self;
 }
 
+- (void)setupSettings
+{
+    self.replaceIndexes = [NSMutableSet setWithCapacity:0];
+    self.badgeValueDict = [NSMutableDictionary dictionaryWithCapacity:0];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                            selector:@selector(badgeValueChange:)
+                                                name:HGTabbarButtonBadgeValueChangedNotification
+                                              object:nil];
+
+}
 #pragma mark 初始化按钮
 -(void)tabbarWithTitles:(NSArray<NSString *> *)titles
           titleNorColor:(UIColor *)normalColor
@@ -85,13 +102,64 @@
     
     _titles=titles;
     
+
 }
+
+- (void)badgeValueChange:(NSNotification *)notice
+{
+    HGTabbarButton *tabBarButton = notice.object;
+    NSInteger index = [_tabBarBackgroundView.subviews indexOfObject:tabBarButton];
+    NSString *indexString = [NSString stringWithFormat:@"%d",(int)index];
+    
+    [self.badgeValueDict  setValue:tabBarButton.badgeValue forKey:indexString];
+    [self setNeedsDisplay];
+}
+
+-(void)drawRect:(CGRect)rect
+{
+    if (_buttonAlignment == HGTabBarButtonHorizontal)    return;
+
+    CGContextRef context=UIGraphicsGetCurrentContext();
+
+    //    __block CGFloat heigth = rect.size.height ;
+    __block NSInteger count = _tabBarBackgroundView.subviews.count;
+    __block CGFloat width = rect.size.width / count;
+    __block CGFloat arcWH=18;
+    __block CGFloat marginX=20.0f;
+    __block CGFloat marginY=1.5f;
+    __block CGFloat arcY=marginY+arcWH * 0.5;
+    __block NSDictionary *attr=@{
+                                 NSForegroundColorAttributeName:[UIColor whiteColor],
+                                 NSFontAttributeName:[UIFont systemFontOfSize:14.0f]
+                                 };
+    
+    [self.badgeValueDict enumerateKeysAndObjectsWithOptions:NSEnumerationConcurrent usingBlock:^(NSString  *key, NSString *badgeValue, BOOL * _Nonnull stop) {
+        
+        CGSize size=[badgeValue sizeWithAttributes:attr];
+
+
+        NSInteger index = key.integerValue;
+//        CGRect frame = CGRectMake(width * index, marginY, width , heigth);
+        CGFloat arcX = (index+0.5) * width + marginX;
+        CGRect squRect = CGRectMake(arcX-size.width *0.5 , arcY - size.height *0.5, size.width, size.height);
+
+        CGContextAddArc(context, arcX, arcY, arcWH * 0.5, M_PI_2, 1.5 * M_PI, 0);// left arc
+        CGContextAddArc(context, arcX, arcY, arcWH * 0.5, M_PI_2, 1.5 * M_PI, 1);// right arc
+        CGContextAddRect(context, squRect);// squareness
+        
+        if(!CGRectEqualToRect(squRect, CGRectZero)) CGContextAddRect(context, squRect);
+        [badgeValue drawInRect:squRect withAttributes:attr];
+
+    }];
+    
+    [[UIColor redColor] set];
+    CGContextFillPath(context);
+}
+
 
 // 布局子控件
 -(void)layoutSubviews{
     [super layoutSubviews];
-    
-    self.backgroundColor=TabBarbackColor;
     
     //背景View的frame
     _tabBarBackgroundView.frame = self.bounds;
@@ -156,8 +224,7 @@
 -(void)layoutSubviews
 {
     [super layoutSubviews];
-    
-    if (!self.titleLabel.text)  return;
+        
     if (_buttonAlignment == HGTabBarButtonVertical) {
         self.titleLabel.textAlignment=NSTextAlignmentCenter;
         CGSize  imageSize=self.imageView.frame.size;
@@ -165,20 +232,26 @@
         self.titleEdgeInsets = UIEdgeInsetsMake(0.5*imageSize.height+2, -0.5*imageSize.width, -0.5*imageSize.height-2, 0.5*imageSize.width);
         self.imageEdgeInsets = UIEdgeInsetsMake(-0.5*titleSize.height, 0.5*titleSize.width, 0.5*titleSize.height, -0.5*titleSize.width);
         
+    }else{
+        CGFloat margin=2.5f;
+        self.titleEdgeInsets = UIEdgeInsetsMake(0, margin, 0, -margin);
+        self.imageEdgeInsets = UIEdgeInsetsMake(0, -margin, 0, margin);
     }
 }
+
+/*
 -(void)drawRect:(CGRect)rect
 {
     if (!_badgeValue) return;
     if (_buttonAlignment == HGTabBarButtonHorizontal)   return;
-    if (_badgeValue.length > 2) _badgeValue=[_badgeValue substringToIndex:2];
+    if (_badgeValue.length > 2) _badgeValue=[_badgeValue substringToIndex:1];
     
-    CGFloat height=18;
-    CGFloat marginX=4.5f;
-    CGFloat marginY=2;
-    CGFloat arcX=CGRectGetMaxX(self.imageView.frame)+marginX;
+    CGFloat arcWH=18;
+    CGFloat marginX=20.0f;
+    CGFloat marginY=1.5f;
+    CGFloat arcX=rect.origin.x+rect.size.width*0.5+marginX;
     
-    CGFloat arcY=marginY+height *0.5;
+    CGFloat arcY=marginY+arcWH *0.5;
     
     NSDictionary *attr=@{
                          NSForegroundColorAttributeName:[UIColor whiteColor],
@@ -191,8 +264,8 @@
     
     [[UIColor redColor] set];
     
-    CGContextAddArc(context, arcX, arcY, height * 0.5, M_PI_2, 0, 0);// left arc
-    CGContextAddArc(context, arcX, arcY, height * 0.5, 0, M_PI_2, 0);// right arc
+    CGContextAddArc(context, arcX, arcY, arcWH * 0.5, M_PI_2, 1.5 * M_PI, 0);// left arc
+    CGContextAddArc(context, arcX, arcY, arcWH * 0.5, M_PI_2, 1.5 * M_PI, 1);// right arc
     CGContextAddRect(context, squRect);// squareness
     
     if(!CGRectEqualToRect(squRect, CGRectZero))    CGContextAddRect(context, squRect);
@@ -201,10 +274,15 @@
     [_badgeValue drawInRect:squRect withAttributes:attr];
     
 }
+*/
+
 -(void)setBadgeValue:(NSString *)badgeValue
 {
     _badgeValue=badgeValue;
-    [self setNeedsDisplay];
+    
+    if (_buttonAlignment == HGTabBarButtonHorizontal)    return;
+    [[NSNotificationCenter defaultCenter] postNotificationName:HGTabbarButtonBadgeValueChangedNotification
+                                                        object:self];
 }
 
 //图片高亮时候会调用这个方法,取消高亮
