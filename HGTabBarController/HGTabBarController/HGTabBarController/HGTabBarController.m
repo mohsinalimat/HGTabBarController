@@ -8,8 +8,11 @@
 
 #import "HGTabBarController.h"
 #import "HGTabBar.h"
+#import <objc/runtime.h>
 
-@interface HGTabBarController ()<HGTabBarDelegate,UINavigationControllerDelegate>
+NSString * const HGViewControllerHidesBottomBarNotification = @"HGViewControllerHidesBottomBarNotification";
+
+@interface HGTabBarController () <HGTabBarDelegate>
 
 @property (nonatomic, strong) UIView            *currentView; // <-当前的视图view
 @property (nonatomic, assign) BOOL  isNavigationController;// <- 子控制器都是导航控制器
@@ -20,26 +23,26 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor=[UIColor yellowColor];
     [self setupControllers];
+    [self setupTabBar];
 }
-
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self setupTabBar];
+    if (_isNavigationController)   _tabBar.hidden = NO;
 }
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     
-    if (!_isNavigationController)   _tabBar.hidden = NO;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     
-    if (!_isNavigationController)   _tabBar.hidden = NO;
+    if (_isNavigationController)   _tabBar.hidden = YES;
     self.navigationController.navigationBar.hidden = NO;
 }
 
@@ -48,23 +51,10 @@
     for (NSInteger i=0; i<_viewControllers.count; i++) {
         UINavigationController *controller=(UINavigationController *)_viewControllers[i];
         if([controller isKindOfClass:[UINavigationController class]]){
-            controller.delegate=self;
             self.isNavigationController=YES;
             self.navigationController.navigationBar.hidden=YES;
             controller.topViewController.title=_tabBar.titles[i];
-            
-            // 这里需要自己根据项目需求实现
-            if (_leftBarButtonItem) {
-                controller.topViewController.navigationItem.leftBarButtonItem=_leftBarButtonItem;
-            }else{
-                controller.topViewController.navigationItem.leftBarButtonItem =
-                [[UIBarButtonItem alloc]initWithTitle:@"< 返回"
-                                                style:UIBarButtonItemStylePlain
-                                               target:self
-                                               action:@selector(back)];
-            }
         }
-        
         UIView *view=controller.view;
         view.frame=self.view.bounds;
         [self addChildViewController:controller];
@@ -115,9 +105,11 @@
     
     // 2.将之前的视图移除,并将选中的视图添加到self.view
     [_currentView removeFromSuperview];
+
     _currentView=self.viewControllers[index].view;
     [self.view addSubview:_currentView];
     [self.view addSubview:_tabBar];
+    
     if(!_isNavigationController) self.title=_tabBar.titles[index];
     
     // 3.返回状态和更新代理方法
@@ -130,48 +122,50 @@
     
 }
 
-#pragma mark - UINavigationControllerDelegate
--(void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
-{
-    if (navigationController.viewControllers.count > 1) {
-        [_tabBar removeFromSuperview];
-    }else{
-        [self.view addSubview:_tabBar];
-    }
-}
-
 @end
 
 #pragma mark - UIViewController分类
 @implementation UIViewController (HGTabBarController)
 
--(void)setHg_tabBarItem:(HGTabbarButton *)hg_tabBarItem
+- (void)setHg_tabBarItem:(HGTabbarButton *)hg_tabBarItem
 {
     self.hg_tabBarItem=hg_tabBarItem;
 }
 
--(HGTabbarButton *)hg_tabBarItem
+- (HGTabbarButton *)hg_tabBarItem
 {
-    HGTabBarController *tabBarController=self.hg_tabBarController;
-    NSUInteger index=0;
-    if ([self.parentViewController isKindOfClass:[UINavigationController class]]) {
-        index=[tabBarController.viewControllers indexOfObject:self.parentViewController];
-    }else{
-        index=[tabBarController.viewControllers indexOfObject:self];
-    }
-    
-    HGTabBar *tabBar=tabBarController.tabBar;
-    
-    return tabBar.subviews[1].subviews[index];
+    return getTabBarItem(self);
 }
+
 
 - (HGTabBarController *)hg_tabBarController
 {
-    if ([self.parentViewController isKindOfClass:[UINavigationController class]]) {
-        return (HGTabBarController *)self.parentViewController.parentViewController;
-    }
-    return (HGTabBarController *)self.parentViewController;
+    return getTabBarController(self);
 }
+
+UIKIT_STATIC_INLINE HGTabbarButton *getTabBarItem(UIViewController *viewController) {
+    
+    HGTabBarController *tabBarController=getTabBarController(viewController);
+    
+    for (UIViewController *parentViewController = viewController; ;parentViewController = parentViewController.parentViewController)
+    {
+        if ([tabBarController.viewControllers containsObject:parentViewController]) {
+            NSInteger index=[tabBarController.viewControllers indexOfObject:parentViewController];
+            return tabBarController.tabBar.subviews[1].subviews[index];
+        }
+    }
+}
+
+UIKIT_STATIC_INLINE HGTabBarController *getTabBarController(UIViewController *viewController){
+    
+    for (UIViewController *parentViewController = viewController; ;parentViewController = parentViewController.parentViewController)
+    {
+        if (parentViewController == nil) NSCAssert1(NO, @"%@ 不是HGTabBarController的直接或者间接的子控制器", viewController);
+        if ([parentViewController isKindOfClass:[HGTabBarController class]])
+        return (HGTabBarController *)parentViewController;
+    }
+}
+
 
 @end
 

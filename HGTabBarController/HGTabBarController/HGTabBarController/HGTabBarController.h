@@ -33,6 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 代理
 @property(nonatomic, assign) id<HGTabBarControllerDelegate> delegate;
 
+
 /// 返回按钮,需要自己根据项目需求实现,.m文件内需要修改
 @property(nullable, nonatomic,strong) UIBarButtonItem *leftBarButtonItem;
 
@@ -50,6 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(null_resettable, nonatomic, strong) HGTabbarButton *hg_tabBarItem; // Automatically created lazily with the view controller's title if it's not set explicitly.
 
 @property(nullable, nonatomic, readonly, strong) HGTabBarController *hg_tabBarController; // If the view controller has a tab bar controller as its ancestor, return it. Returns nil otherwise.
+
 
 @end
 

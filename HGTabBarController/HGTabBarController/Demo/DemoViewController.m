@@ -14,9 +14,14 @@
 @implementation DemoViewController
 - (IBAction)push:(id)sender {
     // push到demo1
+    
     Demo1ViewController *demo1=[[Demo1ViewController alloc]init];
     [self.navigationController pushViewController:demo1 animated:YES];
-    self.hg_tabBarItem.badgeValue=@"122"; // 设置提醒小红点
+    
+    NSLog(@"%@",self.hg_tabBarController);
+    NSLog(@"%@",self.hg_tabBarItem);
+
+    self.hg_tabBarItem.badgeValue=@""; // 设置提醒小红点
 }
 
 - (void)viewDidLoad {
@@ -26,6 +31,14 @@
                                               green:arc4random_uniform(100)/100.0
                                                blue:arc4random_uniform(100)/100.0
                                               alpha:1];
+}
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
 }
 
 @end

@@ -107,7 +107,11 @@ static NSString * const HGTabbarButtonBadgeValueChangedNotification=@"HGTabbarBu
 
 - (void)badgeValueChange:(NSNotification *)notice
 {
+    return  ;
     HGTabbarButton *tabBarButton = notice.object;
+    
+    if (![_tabBarBackgroundView.subviews containsObject:tabBarButton])  return;
+    
     NSInteger index = [_tabBarBackgroundView.subviews indexOfObject:tabBarButton];
     NSString *indexString = [NSString stringWithFormat:@"%d",(int)index];
     
@@ -117,8 +121,11 @@ static NSString * const HGTabbarButtonBadgeValueChangedNotification=@"HGTabbarBu
 
 -(void)drawRect:(CGRect)rect
 {
+    
+    return  ;
     if (_buttonAlignment == HGTabBarButtonHorizontal)    return;
 
+    
     CGContextRef context=UIGraphicsGetCurrentContext();
 
     //    __block CGFloat heigth = rect.size.height ;
@@ -133,13 +140,13 @@ static NSString * const HGTabbarButtonBadgeValueChangedNotification=@"HGTabbarBu
                                  NSFontAttributeName:[UIFont systemFontOfSize:14.0f]
                                  };
     
-    [self.badgeValueDict enumerateKeysAndObjectsWithOptions:NSEnumerationConcurrent usingBlock:^(NSString  *key, NSString *badgeValue, BOOL * _Nonnull stop) {
+    [self.badgeValueDict enumerateKeysAndObjectsWithOptions:NSEnumerationConcurrent
+                                                 usingBlock:^(NSString  *key, NSString *badgeValue, BOOL * _Nonnull stop) {
         
         CGSize size=[badgeValue sizeWithAttributes:attr];
 
 
         NSInteger index = key.integerValue;
-//        CGRect frame = CGRectMake(width * index, marginY, width , heigth);
         CGFloat arcX = (index+0.5) * width + marginX;
         CGRect squRect = CGRectMake(arcX-size.width *0.5 , arcY - size.height *0.5, size.width, size.height);
 
@@ -226,9 +233,9 @@ static NSString * const HGTabbarButtonBadgeValueChangedNotification=@"HGTabbarBu
     [super layoutSubviews];
         
     if (_buttonAlignment == HGTabBarButtonVertical) {
-        self.titleLabel.textAlignment=NSTextAlignmentCenter;
-        CGSize  imageSize=self.imageView.frame.size;
-        CGSize  titleSize=self.titleLabel.frame.size;
+        self.titleLabel.textAlignment = NSTextAlignmentCenter;
+        CGSize  imageSize = self.imageView.frame.size;
+        CGSize  titleSize = self.titleLabel.frame.size;
         self.titleEdgeInsets = UIEdgeInsetsMake(0.5*imageSize.height+2, -0.5*imageSize.width, -0.5*imageSize.height-2, 0.5*imageSize.width);
         self.imageEdgeInsets = UIEdgeInsetsMake(-0.5*titleSize.height, 0.5*titleSize.width, 0.5*titleSize.height, -0.5*titleSize.width);
         
@@ -239,50 +246,29 @@ static NSString * const HGTabbarButtonBadgeValueChangedNotification=@"HGTabbarBu
     }
 }
 
-/*
+
 -(void)drawRect:(CGRect)rect
 {
     if (!_badgeValue) return;
     if (_buttonAlignment == HGTabBarButtonHorizontal)   return;
-    if (_badgeValue.length > 2) _badgeValue=[_badgeValue substringToIndex:1];
     
-    CGFloat arcWH=18;
-    CGFloat marginX=20.0f;
-    CGFloat marginY=1.5f;
-    CGFloat arcX=rect.origin.x+rect.size.width*0.5+marginX;
+    UIBezierPath *path = [UIBezierPath bezierPath];
     
-    CGFloat arcY=marginY+arcWH *0.5;
+    CGFloat radius = 5;
+    CGFloat pointX = rect.origin.x+rect.size.width*0.5+15+radius*0.5;
+    CGFloat pointY = 5+radius*0.5;
     
-    NSDictionary *attr=@{
-                         NSForegroundColorAttributeName:[UIColor whiteColor],
-                         NSFontAttributeName:[UIFont systemFontOfSize:14.0f]
-                         };
-    
-    CGSize size=[_badgeValue sizeWithAttributes:attr];
-    CGRect squRect=CGRectMake(arcX-size.width *0.5 , arcY - size.height *0.5, size.width, size.height);
-    CGContextRef context=UIGraphicsGetCurrentContext();
-    
+    [path addArcWithCenter:CGPointMake(pointX, pointY) radius:radius startAngle:0 endAngle:2*M_PI clockwise:YES];
     [[UIColor redColor] set];
-    
-    CGContextAddArc(context, arcX, arcY, arcWH * 0.5, M_PI_2, 1.5 * M_PI, 0);// left arc
-    CGContextAddArc(context, arcX, arcY, arcWH * 0.5, M_PI_2, 1.5 * M_PI, 1);// right arc
-    CGContextAddRect(context, squRect);// squareness
-    
-    if(!CGRectEqualToRect(squRect, CGRectZero))    CGContextAddRect(context, squRect);
-    CGContextFillPath(context);
-    
-    [_badgeValue drawInRect:squRect withAttributes:attr];
-    
+    [path fill];
+
 }
-*/
+
 
 -(void)setBadgeValue:(NSString *)badgeValue
 {
     _badgeValue=badgeValue;
-    
-    if (_buttonAlignment == HGTabBarButtonHorizontal)    return;
-    [[NSNotificationCenter defaultCenter] postNotificationName:HGTabbarButtonBadgeValueChangedNotification
-                                                        object:self];
+    [self setNeedsDisplay];
 }
 
 //图片高亮时候会调用这个方法,取消高亮
