@@ -8,8 +8,8 @@
 
 #import "HGTabBar.h"
 
-#define TabBarbackColor   [UIColor  colorWithRed:245/255.0 green:245/255.0 blue:245/255.0 alpha:0.9]
-#define TabBarButtonFont  [UIFont systemFontOfSize:14.0f]
+#define HGTabBarBackColor   [UIColor  colorWithRed:245/255.0 green:245/255.0 blue:245/255.0 alpha:0.9]
+#define HGTabBarButtonFont  [UIFont systemFontOfSize:14.0f]
 
 
 static NSString * const HGTabbarButtonBadgeValueChangedNotification=@"HGTabbarButtonBadgeValueChangedNotification";
@@ -63,7 +63,7 @@ static NSString * const HGTabbarButtonBadgeValueChangedNotification=@"HGTabbarBu
     _splitLine=splitLine;
     
     UIView *tabBarBackgroundView=[[UIView alloc]init];
-    tabBarBackgroundView.backgroundColor=TabBarbackColor;
+    tabBarBackgroundView.backgroundColor=HGTabBarBackColor;
     [self addSubview:tabBarBackgroundView];
     _tabBarBackgroundView=tabBarBackgroundView;
     
@@ -86,7 +86,7 @@ static NSString * const HGTabbarButtonBadgeValueChangedNotification=@"HGTabbarBu
         [btn setImage:[UIImage imageNamed:normalImges[i]] forState:UIControlStateNormal];
         [btn setImage:[UIImage imageNamed:selImges[i]] forState:UIControlStateSelected];
         
-        btn.titleLabel.font=_font ? _font :TabBarButtonFont;
+        btn.titleLabel.font = _font ? _font : HGTabBarButtonFont;
         
         //监听事件
         [btn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchDown];
@@ -107,7 +107,6 @@ static NSString * const HGTabbarButtonBadgeValueChangedNotification=@"HGTabbarBu
 
 - (void)badgeValueChange:(NSNotification *)notice
 {
-    return  ;
     HGTabbarButton *tabBarButton = notice.object;
     
     if (![_tabBarBackgroundView.subviews containsObject:tabBarButton])  return;
@@ -122,8 +121,7 @@ static NSString * const HGTabbarButtonBadgeValueChangedNotification=@"HGTabbarBu
 -(void)drawRect:(CGRect)rect
 {
     
-    return  ;
-    if (_buttonAlignment == HGTabBarButtonHorizontal)    return;
+    if (_buttonAlignment == HGTabBarButtonHorizontal) return;
 
     
     CGContextRef context=UIGraphicsGetCurrentContext();
@@ -205,6 +203,7 @@ static NSString * const HGTabbarButtonBadgeValueChangedNotification=@"HGTabbarBu
     tabBarItem.tag=index;
     [self.replaceIndexes addObject:@(index)];
     [_tabBarBackgroundView insertSubview:tabBarItem atIndex:index];
+    
     [self setNeedsLayout];
     [self layoutIfNeeded];
 }
@@ -255,8 +254,8 @@ static NSString * const HGTabbarButtonBadgeValueChangedNotification=@"HGTabbarBu
     UIBezierPath *path = [UIBezierPath bezierPath];
     
     CGFloat radius = 5;
-    CGFloat pointX = rect.origin.x+rect.size.width*0.5+15+radius*0.5;
-    CGFloat pointY = 5+radius*0.5;
+    CGFloat pointX = rect.origin.x + rect.size.width*0.5 + 15 + radius*0.5;
+    CGFloat pointY = 5 + radius*0.5;
     
     [path addArcWithCenter:CGPointMake(pointX, pointY) radius:radius startAngle:0 endAngle:2*M_PI clockwise:YES];
     [[UIColor redColor] set];

@@ -48,12 +48,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIViewController (HGTabBarController)
 
-@property(null_resettable, nonatomic, strong) HGTabbarButton *hg_tabBarItem; // Automatically created lazily with the view controller's title if it's not set explicitly.
+@property(null_resettable, nonatomic, strong , readonly) HGTabbarButton *hg_tabBarItem; // Automatically created lazily with the view controller's title if it's not set explicitly.
 
 @property(nullable, nonatomic, readonly, strong) HGTabBarController *hg_tabBarController; // If the view controller has a tab bar controller as its ancestor, return it. Returns nil otherwise.
 
+//@property(nonatomic) BOOL  hg_hidesBottomBarWhenPushed;
 
 @end
+
+
 
 
 NS_ASSUME_NONNULL_END

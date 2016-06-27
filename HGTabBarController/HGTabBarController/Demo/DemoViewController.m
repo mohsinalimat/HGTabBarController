@@ -18,10 +18,11 @@
     Demo1ViewController *demo1=[[Demo1ViewController alloc]init];
     [self.navigationController pushViewController:demo1 animated:YES];
     
-    NSLog(@"%@",self.hg_tabBarController);
-    NSLog(@"%@",self.hg_tabBarItem);
+//    NSLog(@"%@",self.hg_tabBarController);
+//    NSLog(@"%@",self.hg_tabBarItem);
 
-    self.hg_tabBarItem.badgeValue=@""; // 设置提醒小红点
+//    self.hg_tabBarItem.badgeValue=@""; // 设置提醒小红点
+    
 }
 
 - (void)viewDidLoad {

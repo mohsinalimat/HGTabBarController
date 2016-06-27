@@ -27,6 +27,7 @@ NSString * const HGViewControllerHidesBottomBarNotification = @"HGViewController
     [self setupControllers];
     [self setupTabBar];
 }
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -127,9 +128,63 @@ NSString * const HGViewControllerHidesBottomBarNotification = @"HGViewController
 #pragma mark - UIViewController分类
 @implementation UIViewController (HGTabBarController)
 
-- (void)setHg_tabBarItem:(HGTabbarButton *)hg_tabBarItem
++ (void)load
 {
-    self.hg_tabBarItem=hg_tabBarItem;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+
+        SEL originalPushSel = @selector(pushViewController:animated:);
+        SEL newPushSel = @selector(newPushViewController:animated:);
+        
+        SEL originalPopSel = @selector(popViewControllerAnimated:);
+        SEL newPopSel = @selector(newPopViewControllerAnimated:);
+        
+        [UIViewController swizzleInstanceMethod:originalPushSel with:newPushSel];
+        [UIViewController swizzleInstanceMethod:originalPopSel with:newPopSel];
+
+    });
+}
+
+
++ (void)swizzleInstanceMethod:(SEL)originalSel with:(SEL)newSel
+{
+    Class cls=UINavigationController.class;
+    
+    Method originalMethod = class_getInstanceMethod(cls, originalSel);
+    Method newMethod = class_getInstanceMethod(cls, newSel);
+    
+    
+    class_addMethod(cls,
+                    originalSel,
+                    class_getMethodImplementation(cls, originalSel),
+                    method_getTypeEncoding(originalMethod));
+    
+    class_addMethod(cls,
+                    newSel,
+                    class_getMethodImplementation(cls, newSel),
+                    method_getTypeEncoding(newMethod));
+    
+    method_exchangeImplementations(class_getInstanceMethod(cls, originalSel),
+                                   class_getInstanceMethod(cls, newSel));
+
+}
+
+- (nullable UIViewController *)newPopViewControllerAnimated:(BOOL)animated
+{
+    
+    if (self.navigationController) {
+        getTabBar(self).hidden = self.navigationController.viewControllers.count !=2 ;
+        
+    }
+    return [self newPopViewControllerAnimated:animated];
+}
+
+- (void)newPushViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    if (self.navigationController) {
+        getTabBar(self).hidden = self.navigationController.viewControllers.count > 1 ;
+    }
+    [self newPushViewController:viewController animated:animated];
 }
 
 - (HGTabbarButton *)hg_tabBarItem
@@ -143,10 +198,12 @@ NSString * const HGViewControllerHidesBottomBarNotification = @"HGViewController
     return getTabBarController(self);
 }
 
-UIKIT_STATIC_INLINE HGTabbarButton *getTabBarItem(UIViewController *viewController) {
-    
+static inline HGTabBar *getTabBar(UIViewController *viewController) {
+    return getTabBarController(viewController).tabBar;
+}
+
+static inline HGTabbarButton *getTabBarItem(UIViewController *viewController) {
     HGTabBarController *tabBarController=getTabBarController(viewController);
-    
     for (UIViewController *parentViewController = viewController; ;parentViewController = parentViewController.parentViewController)
     {
         if ([tabBarController.viewControllers containsObject:parentViewController]) {
@@ -156,17 +213,16 @@ UIKIT_STATIC_INLINE HGTabbarButton *getTabBarItem(UIViewController *viewControll
     }
 }
 
-UIKIT_STATIC_INLINE HGTabBarController *getTabBarController(UIViewController *viewController){
-    
+static inline HGTabBarController *getTabBarController(UIViewController *viewController) {
     for (UIViewController *parentViewController = viewController; ;parentViewController = parentViewController.parentViewController)
     {
-        if (parentViewController == nil) NSCAssert1(NO, @"%@ 不是HGTabBarController的直接或者间接的子控制器", viewController);
+        if (parentViewController == nil) NSCAssert1(NO, @"%@ 的父控制器中没有找到HGTabBarController类型的控制器", viewController);
         if ([parentViewController isKindOfClass:[HGTabBarController class]])
         return (HGTabBarController *)parentViewController;
     }
 }
 
-
 @end
+
 
 

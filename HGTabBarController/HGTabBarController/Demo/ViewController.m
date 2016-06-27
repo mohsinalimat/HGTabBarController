@@ -69,6 +69,7 @@
     
     tb.viewControllers=controllers;
     tb.hidesBottomBarWhenPushed=YES;
+    
     [self.navigationController pushViewController:tb animated:YES];
 }
 
